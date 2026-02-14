@@ -142,8 +142,16 @@
     .hero-description {
         font-size: var(--text-sm);
         margin-top: var(--space-6);
-        max-width: 85%;
+        max-width: 90%;
         line-height: 1.6;
+        /* Mobile Glassmorphism */
+        background: rgba(10, 10, 10, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: var(--space-4);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .scroll-indicator {
@@ -155,5 +163,23 @@
 @keyframes shine {
     to {
         background-position: 200% center;
+    }
+}
+
+/* Glitch Effect Keyframes (Optional usage) */
+@keyframes glitch {
+
+    2%,
+    64% {
+        transform: translate(2px, 0) skew(0deg);
+    }
+
+    4%,
+    60% {
+        transform: translate(-2px, 0) skew(0deg);
+    }
+
+    62% {
+        transform: translate(0, 0) skew(5deg);
     }
 }

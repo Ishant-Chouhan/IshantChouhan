@@ -14,22 +14,22 @@ const NeonCanvas = () => {
 
         let w = window.innerWidth;
         let h = window.innerHeight;
+        const isMobile = w < 768;
 
         // Configuration for "Living" Feel
         const config = {
-            neuronCount: 45,
-            starCount: 150,
-            connectionDistance: 180,
-            pulseSpeed: 4.5,
+            neuronCount: isMobile ? 30 : 45, // Fewer, cleaner on mobile
+            starCount: isMobile ? 80 : 150,
+            connectionDistance: isMobile ? 140 : 180,
+            pulseSpeed: isMobile ? 5 : 4.5,
             maxPulses: 50,
             mouseRepulsion: 200,
             energyDecay: 0.96,
             refractoryPeriod: 30,
-            springStrength: 0.005,
+            springStrength: isMobile ? 0.008 : 0.005,
         };
 
         const mouse = { x: undefined, y: undefined };
-        const tilt = { current: { x: 0, y: 0 }, target: { x: 0, y: 0 } }; // Gyroscope tilt with smoothing
 
         // State
         let neurons = [];
@@ -74,20 +74,20 @@ const NeonCanvas = () => {
                 this.y = y || Math.random() * h;
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
-                this.baseSize = Math.random() * 2 + 1.5;
+                // Bigger neurons on mobile for impact
+                this.baseSize = isMobile ? Math.random() * 2.5 + 2 : Math.random() * 2 + 1.5;
                 this.energy = 0; // 0 to 1, represents excitation
                 this.refractory = 0; // Cooldown frames
             }
 
             update(neighbors) {
-                // 1. Basic Movement
+                // 1. Basic Movement + Random Drift
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // 1.5 Gyroscope Tilt Force
-                // Apply a gentle push based on device tilt
-                this.vx += tilt.current.x * 0.08;
-                this.vy += tilt.current.y * 0.08;
+                // Add subtle random drift to keep it alive without interaction
+                this.vx += (Math.random() - 0.5) * 0.02;
+                this.vy += (Math.random() - 0.5) * 0.02;
 
                 // 2. Spring Physics (Cohesion)
                 // Gently pull towards neighbors to simulate structural integrity
@@ -234,10 +234,6 @@ const NeonCanvas = () => {
 
             const scrollOp = scrollY.get();
 
-            // Smoothly interpolate tilt
-            tilt.current.x += (tilt.target.x - tilt.current.x) * 0.1;
-            tilt.current.y += (tilt.target.y - tilt.current.y) * 0.1;
-
             // 0. Draw Background Stars
             stars.forEach(star => {
                 star.update();
@@ -316,25 +312,6 @@ const NeonCanvas = () => {
         };
         const handleMouseLeave = () => { mouse.x = undefined; mouse.y = undefined; };
 
-        const handleDeviceOrientation = (event) => {
-            // Gamma: Left/Right tilt (-90 to 90) -> mapped to X force
-            // Beta: Front/Back tilt (-180 to 180) -> mapped to Y force
-            if (event.gamma !== null) {
-                // Smooth, subtle tilt
-                let tx = event.gamma / 15;
-                if (tx > 3) tx = 3;
-                if (tx < -3) tx = -3;
-                tilt.target.x = tx;
-            }
-            if (event.beta !== null) {
-                // Offset holding position
-                let ty = (event.beta - 45) / 15;
-                if (ty > 3) ty = 3;
-                if (ty < -3) ty = -3;
-                tilt.target.y = ty;
-            }
-        };
-
         // Start
         init();
         animate();
@@ -342,13 +319,11 @@ const NeonCanvas = () => {
         window.addEventListener('resize', handleResize);
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseout', handleMouseLeave);
-        window.addEventListener('deviceorientation', handleDeviceOrientation);
 
         return () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseout', handleMouseLeave);
-            window.removeEventListener('deviceorientation', handleDeviceOrientation);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);

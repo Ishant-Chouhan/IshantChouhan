@@ -29,7 +29,7 @@ const Projects = () => {
                     return (
                         <SectionReveal key={project.id} delay={index * 0.1}>
                             <Wrapper
-                                className="project-row"
+                                className="project-row glass-panel"
                                 {...wrapperProps}
                             >
                                 <div className="project-row-left">

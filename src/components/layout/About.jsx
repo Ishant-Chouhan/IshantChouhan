@@ -28,7 +28,7 @@ const About = () => {
                     </SectionReveal>
 
                     <SectionReveal delay={0.3}>
-                        <motion.div className="resume-section">
+                        <motion.div className="resume-section glass-panel">
                             <h3>Education</h3>
                             <div className="resume-item">
                                 <h4>Oriental Institute of Science and Technology, Bhopal</h4>
@@ -36,7 +36,7 @@ const About = () => {
                             </div>
                         </motion.div>
 
-                        <motion.div className="resume-section">
+                        <motion.div className="resume-section glass-panel">
                             <h3>Experience</h3>
                             <div className="resume-item">
                                 <h4>
@@ -64,7 +64,7 @@ const About = () => {
                     </SectionReveal>
 
                     <SectionReveal delay={0.4}>
-                        <motion.div className="resume-section">
+                        <motion.div className="resume-section glass-panel">
                             <h3>Certifications</h3>
                             <div className="resume-item certifications-list">
                                 <a href={`${import.meta.env.BASE_URL}certifications/Amazon_ML_Summer_School.pdf`} target="_blank" rel="noopener noreferrer" className="certification-link">
@@ -82,7 +82,7 @@ const About = () => {
                             </div>
                         </motion.div>
 
-                        <motion.div className="resume-section">
+                        <motion.div className="resume-section glass-panel">
                             <h3>Skills</h3>
                             <div className="skills-grid">
                                 <span>Python</span>

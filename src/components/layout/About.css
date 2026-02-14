@@ -33,13 +33,19 @@
     margin-bottom: var(--space-8);
 }
 
+.resume-section {
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    border-radius: var(--space-4);
+}
+
 .resume-section h3 {
     font-family: var(--font-display);
     font-size: var(--text-xl);
     color: var(--color-text);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
     border-bottom: 1px solid var(--color-border);
-    padding-bottom: var(--space-2);
+    padding-bottom: var(--space-4);
 }
 
 .resume-item {

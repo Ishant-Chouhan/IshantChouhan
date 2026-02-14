@@ -6,6 +6,7 @@ const Layout = ({ children }) => {
     return (
         <>
             <Cursor />
+            <div className="scanlines"></div>
             <Header />
             <main style={{ minHeight: '100vh', paddingTop: 'var(--space-16)' }}>
                 {children}
