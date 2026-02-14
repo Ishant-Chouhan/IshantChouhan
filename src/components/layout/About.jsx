@@ -40,7 +40,7 @@ const About = () => {
                             <h3>Experience</h3>
                             <div className="resume-item">
                                 <h4>
-                                    <a href={`${import.meta.env.BASE_URL}certifications/Decode_Data_Internship.pdf`} target="_blank" rel="noopener noreferrer" className="experience-link">
+                                    <a href={`${import.meta.env.BASE_URL}certifications/Decode_Data_Offer_Letter.pdf`} target="_blank" rel="noopener noreferrer" className="experience-link">
                                         AI/ML Intern @ Decode Data Academy
                                     </a>
                                 </h4>
