@@ -7,11 +7,11 @@ const Projects = () => {
     return (
         <section
             className="projects-section"
-            id="work"
+            id="projects"
         >
             <SectionReveal>
                 <div className="projects-header">
-                    <h2 className="section-title">Selected Work</h2>
+                    <h2 className="section-title">Projects</h2>
                     <span className="project-count">({projects.length})</span>
                 </div>
             </SectionReveal>

@@ -19,7 +19,7 @@ const Header = () => {
                 <a href="#">ISHANT</a>
             </div>
             <nav className="nav">
-                {['Work', 'About', 'Contact'].map((item) => (
+                {['Projects', 'About', 'Contact'].map((item) => (
                     <a
                         key={item}
                         href={`#${item.toLowerCase()}`}
