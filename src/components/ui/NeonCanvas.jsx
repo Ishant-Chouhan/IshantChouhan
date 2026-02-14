@@ -85,9 +85,9 @@ const NeonCanvas = () => {
                 this.y += this.vy;
 
                 // 1.5 Gyroscope Tilt Force
-                // Apply a gentle push based on device tilt
-                this.vx += tilt.x * 0.05;
-                this.vy += tilt.y * 0.05;
+                // Apply a stronger push based on device tilt
+                this.vx += tilt.x * 0.2;
+                this.vy += tilt.y * 0.2;
 
                 // 2. Spring Physics (Cohesion)
                 // Gently pull towards neighbors to simulate structural integrity
@@ -316,17 +316,17 @@ const NeonCanvas = () => {
             // Gamma: Left/Right tilt (-90 to 90) -> mapped to X force
             // Beta: Front/Back tilt (-180 to 180) -> mapped to Y force
             if (event.gamma !== null) {
-                // Normalize and clamp
-                let tx = event.gamma / 20; // Sensitivity factor
-                if (tx > 2) tx = 2;
-                if (tx < -2) tx = -2;
+                // Normalize, more sensitive (divide by 10 instead of 20)
+                let tx = event.gamma / 10;
+                if (tx > 5) tx = 5;
+                if (tx < -5) tx = -5;
                 tilt.x = tx;
             }
             if (event.beta !== null) {
-                // Offset holding position (usually people hold phone at 45 degrees)
-                let ty = (event.beta - 45) / 20;
-                if (ty > 2) ty = 2;
-                if (ty < -2) ty = -2;
+                // Offset holding position, more sensitive
+                let ty = (event.beta - 45) / 10;
+                if (ty > 5) ty = 5;
+                if (ty < -5) ty = -5;
                 tilt.y = ty;
             }
         };
